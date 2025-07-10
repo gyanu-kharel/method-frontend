@@ -1,8 +1,13 @@
-"use client"
+"use client";
 
-import { usePathname } from "next/navigation"
-import { BarChart3, FileText, Home, Settings, Users, CreditCard, FolderSyncIcon as Sync } from "lucide-react"
-import Link from "next/link"
+import { usePathname } from "next/navigation";
+import {
+  FileText,
+  Home,
+  Users,
+  FolderSyncIcon as Sync,
+} from "lucide-react";
+import Link from "next/link";
 
 import {
   Sidebar,
@@ -15,7 +20,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
 const navigation = [
   {
@@ -25,11 +30,6 @@ const navigation = [
         title: "Dashboard",
         url: "/",
         icon: Home,
-      },
-      {
-        title: "Analytics",
-        url: "/analytics",
-        icon: BarChart3,
       },
     ],
   },
@@ -46,32 +46,12 @@ const navigation = [
         url: "/invoices",
         icon: FileText,
       },
-      {
-        title: "Payments",
-        url: "/payments",
-        icon: CreditCard,
-      },
     ],
   },
-  {
-    title: "Integration",
-    items: [
-      {
-        title: "QuickBooks Sync",
-        url: "/quickbooks",
-        icon: Sync,
-      },
-      {
-        title: "Settings",
-        url: "/settings",
-        icon: Settings,
-      },
-    ],
-  },
-]
+];
 
 export function AppSidebar() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <Sidebar variant="inset">
@@ -82,7 +62,9 @@ export function AppSidebar() {
           </div>
           <div className="flex flex-col">
             <span className="font-semibold text-sm">InvoicePro</span>
-            <span className="text-xs text-muted-foreground">CRM & Invoicing</span>
+            <span className="text-xs text-muted-foreground">
+              CRM & Invoicing
+            </span>
           </div>
         </div>
       </SidebarHeader>
@@ -109,5 +91,5 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

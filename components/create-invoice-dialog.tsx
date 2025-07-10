@@ -27,7 +27,7 @@ import { IClient } from "./clients-content";
 interface CreateInvoiceDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onSubmitSuccess: () => void
+  onSubmitSuccess: () => void;
 }
 
 interface ICreateInvoice {
@@ -41,7 +41,7 @@ interface ICreateInvoice {
 export function CreateInvoiceDialog({
   open,
   onOpenChange,
-  onSubmitSuccess
+  onSubmitSuccess,
 }: CreateInvoiceDialogProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
@@ -84,26 +84,33 @@ export function CreateInvoiceDialog({
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/invoices`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/invoices`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (!response.ok) throw new Error("Failed to create invoice");
 
       toast({ title: "Invoice created successfully" });
+      onSubmitSuccess();
       onOpenChange(false);
-      onSubmitSuccess()
       setFormData({
         clientId: "",
         description: "",
         amount: 0,
         dueDate: "",
-        notes: ""
-      })
+        notes: "",
+      });
     } catch (error: any) {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -124,7 +131,11 @@ export function CreateInvoiceDialog({
               <Label htmlFor="client" className="text-right">
                 Client
               </Label>
-              <Select value={formData.clientId} onValueChange={handleClientChange} required>
+              <Select
+                value={formData.clientId}
+                onValueChange={handleClientChange}
+                required
+              >
                 <SelectTrigger className="col-span-3">
                   <SelectValue placeholder="Select a client" />
                 </SelectTrigger>
