@@ -25,7 +25,7 @@ export const UpdateInvoiceDialog = ({invoice, onSubmitSuccess, updateInvoiceDial
   
   setIsLoading(true);
   try {
-    const resp = await fetch(`http://localhost:5232/api/invoices/${invoiceId}`, {
+    const resp = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/invoices/${invoiceId}`, {
       method: "PATCH",
     });
 

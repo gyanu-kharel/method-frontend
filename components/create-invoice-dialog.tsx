@@ -60,7 +60,7 @@ export function CreateInvoiceDialog({
   }, []);
 
   const fetchClients = async () => {
-    const resp = await fetch("http://localhost:5232/api/clients");
+    const resp = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/clients`);
     const data = await resp.json();
     setClients(data);
   };
@@ -84,7 +84,7 @@ export function CreateInvoiceDialog({
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5232/api/invoices", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/invoices`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

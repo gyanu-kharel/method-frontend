@@ -52,7 +52,7 @@ export function CreateClientDialog({ open, onOpenChange, onSubmitSuccess }: Crea
     setIsLoading(true)
 
     try {
-      const res = await fetch("http://localhost:5232/api/clients", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/clients`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

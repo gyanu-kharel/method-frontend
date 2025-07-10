@@ -73,7 +73,7 @@ export function InvoicesContent() {
   }, []);
 
   const fetchInvoices = async () => {
-    var resp = await fetch("http://localhost:5232/api/invoices", {
+    var resp = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/invoices`, {
       method: "GET",
     });
 
